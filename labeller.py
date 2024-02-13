@@ -46,20 +46,22 @@ labeller_layout = [
 	[sg.Image(key="-IMAGE-")],
 ]
 
-window = sg.Window("Labeller", labeller_layout, finalize=True)
+window = sg.Window("Labeller", labeller_layout, finalize=True, return_keyboard_events=True)
 load_next_picture()
 
 while True:
 	event, values = window.read()
 	if event == "Exit" or event == sg.WIN_CLOSED:
 		break
-	if event == "True":
+	if event == "True" or event == "1":
 		target_path = true_folder / Path(current_image_path).name
 		os.rename(current_image_path, target_path)
 		load_next_picture()
-	if event == "False":
+	if event == "False" or event == "2":
 		target_path = false_folder / Path(current_image_path).name
 		os.rename(current_image_path, target_path)
+		load_next_picture()
+	if event == "Skip" or event == "3":
 		load_next_picture()
 
 window.close()
