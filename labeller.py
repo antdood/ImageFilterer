@@ -43,6 +43,7 @@ def load_next_picture():
 labeller_layout = [
 	[sg.Button("True")],
 	[sg.Button("False")],
+	[sg.Button("Skip")],
 	[sg.Image(key="-IMAGE-")],
 ]
 
