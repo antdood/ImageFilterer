@@ -1,4 +1,5 @@
 import face_recognition
+from normalize import normalize
 from PIL import Image
 
 def locate_faces(target_image):
@@ -13,9 +14,9 @@ def crop_faces_and_resize(target_image, face_locations, resize_dimensions):
 	for face_location in face_locations:
 		crop_location = face_location_to_crop_location(face_location)
 		cropped_image = image.crop(crop_location)
-		resized_image = resize_image(cropped_image, resize_dimensions)
-		
-		yield resized_image
+		normalized_image = normalize(cropped_image)
+		resized_image = resize_image(normalized_image, resize_dimensions)
+		resized_image.show()
 
 def resize_image(target_image, target_dimensions):
 	target_image.thumbnail(target_dimensions)
@@ -31,7 +32,7 @@ def face_location_to_crop_location(face_location):
 	return crop_location
 
 if __name__ == "__main__":
-	image = "test.png"
+	image = "test.jpg"
 
 	face_locations = locate_faces(image)
-	crop_faces(image, face_locations, (32, 32))
+	crop_faces_and_resize(image, face_locations, (32, 32))
