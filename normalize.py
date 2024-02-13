@@ -2,7 +2,7 @@ from PIL import Image
 
 def normalize(pic):
 	#grayscale
-	return pic.convert('LA')
+	return pic.convert('L')
 	
 
 
